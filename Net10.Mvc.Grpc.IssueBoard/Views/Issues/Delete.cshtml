@@ -1,0 +1,52 @@
+@model Net10.Mvc.Grpc.IssueBoard.Models.IssueViewModel
+
+@{
+    ViewData["Title"] = "課題削除確認";
+}
+
+<h2>課題削除確認</h2>
+
+<div class="alert alert-danger" role="alert">
+    この課題を削除してもよろしいですか？
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">記入者氏名</dt>
+            <dd class="col-sm-9">@Model.AuthorName</dd>
+
+            <dt class="col-sm-3">登録日時</dt>
+            <dd class="col-sm-9">@Model.CreatedAt.ToString("yyyy/MM/dd HH:mm:ss")</dd>
+
+            <dt class="col-sm-3">カテゴリ名</dt>
+            <dd class="col-sm-9">@Model.Category</dd>
+
+            <dt class="col-sm-3">課題タイトル</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+
+            <dt class="col-sm-3">課題の文面</dt>
+            <dd class="col-sm-9" style="white-space:pre-wrap;">@Model.Description</dd>
+
+            <dt class="col-sm-3">現在の状況</dt>
+            <dd class="col-sm-9">@Model.StatusDisplayName</dd>
+
+            <dt class="col-sm-3">解決の文面</dt>
+            <dd class="col-sm-9" style="white-space:pre-wrap;">@Model.Resolution</dd>
+
+            <dt class="col-sm-3">解決担当者名</dt>
+            <dd class="col-sm-9">@Model.ResolverName</dd>
+
+            <dt class="col-sm-3">最終結果日時</dt>
+            <dd class="col-sm-9">@(Model.ResolvedAt.HasValue ? Model.ResolvedAt.Value.ToString("yyyy/MM/dd HH:mm:ss") : "")</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-danger">削除</button>
+        <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">戻る</a>
+    </div>
+</form>

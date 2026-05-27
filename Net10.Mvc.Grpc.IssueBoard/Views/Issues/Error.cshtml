@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "エラー";
+    var requestId = ViewData["RequestId"] as string;
+}
+
+<h2 class="text-danger">エラーが発生しました。</h2>
+
+@if (!string.IsNullOrEmpty(requestId))
+{
+    <p><strong>Request ID:</strong> <code>@requestId</code></p>
+}
+
+<p>予期しないエラーが発生しました。しばらく経ってから再度お試しください。</p>
+
+<a asp-action="Index" class="btn btn-secondary">課題一覧へ戻る</a>

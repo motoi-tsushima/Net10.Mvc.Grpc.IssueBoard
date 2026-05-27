@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Api.Grpc.IssueBoard/Api.Grpc.IssueBoard.csproj" />
+  <Project Path="Net10.Mvc.Grpc.IssueBoard/Net10.Mvc.Grpc.IssueBoard.csproj" />
+</Solution>

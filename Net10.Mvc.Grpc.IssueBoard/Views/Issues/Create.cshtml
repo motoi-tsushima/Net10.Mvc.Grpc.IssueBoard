@@ -1,0 +1,66 @@
+@model Net10.Mvc.Grpc.IssueBoard.Models.IssueCreateViewModel
+
+@{
+    ViewData["Title"] = "課題新規登録";
+}
+
+<h2>課題新規登録</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="AuthorName" class="form-label"></label>
+                <input asp-for="AuthorName" id="authorNameInput" class="form-control" />
+                <span asp-validation-for="AuthorName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Category" class="form-label"></label>
+                <input asp-for="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">登録</button>
+                <a asp-action="Index" class="btn btn-secondary">戻る</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        (function () {
+            const key = 'issueBoard_authorName';
+            const input = document.getElementById('authorNameInput');
+            if (input && !input.value) {
+                const saved = localStorage.getItem(key);
+                if (saved) input.value = saved;
+            }
+            const form = input ? input.closest('form') : null;
+            if (form) {
+                form.addEventListener('submit', function () {
+                    if (input && input.value) {
+                        localStorage.setItem(key, input.value);
+                    }
+                });
+            }
+        })();
+    </script>
+}

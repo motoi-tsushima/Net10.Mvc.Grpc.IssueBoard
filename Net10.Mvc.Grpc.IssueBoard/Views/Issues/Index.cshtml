@@ -1,0 +1,40 @@
+@model IEnumerable<Net10.Mvc.Grpc.IssueBoard.Models.IssueViewModel>
+
+@{
+    ViewData["Title"] = "課題一覧";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>課題一覧</h2>
+    <a asp-action="Create" class="btn btn-primary">課題登録</a>
+</div>
+
+<table class="table table-hover table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>記入者氏名</th>
+            <th>登録日時</th>
+            <th>カテゴリ名</th>
+            <th>課題タイトル</th>
+            <th>現在の状況</th>
+            <th>解決担当者名</th>
+            <th>最終結果日時</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="cursor:pointer;" onclick="location.href='@Url.Action("Details", new { id = item.Id })'">
+                <td>@item.AuthorName</td>
+                <td>@item.CreatedAt.ToString("yyyy/MM/dd HH:mm")</td>
+                <td>@item.Category</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+                </td>
+                <td>@item.StatusDisplayName</td>
+                <td>@item.ResolverName</td>
+                <td>@(item.ResolvedAt.HasValue ? item.ResolvedAt.Value.ToString("yyyy/MM/dd HH:mm") : "")</td>
+            </tr>
+        }
+    </tbody>
+</table>
